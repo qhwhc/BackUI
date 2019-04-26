@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"  th:fragment = "lineCharts">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="assets/js/echarts.min.js"></script>
+
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 100%;height:400px;"></div>
+<script th:inline="javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var batchNumber = [[${xAxis}]];
+    var yield = [[${yAxis}]];
+    // 指定图表的配置项和数据
+    var option = {
+        grid: {
+            left: '2%',
+            right: '2%',
+            bottom: '3%',
+            containLabel: true
+        },
+        title: {
+            text: '良率分析'
+        },
+        tooltip: {},
+        legend: {
+            data:['良率']
+        },
+        xAxis: {
+            data: batchNumber
+        },
+        yAxis: {},
+        series: [{
+            name: '良率',
+            type: 'line',
+            data: yield,
+        }]
+    };
+    // $.ajax({
+    //     type : "post",
+    //     async : true, //异步执行
+    //     url : "chipYield",
+    //     dataType : "json", //返回数据形式为json
+    //     success : function(json) {
+    //         if (json) {
+    //             fetchData(function (data) {
+    //                 myChart.hideLoading();
+    //                 myChart.setOption({
+    //                     xAxis:{
+    //                         data:json.xAxisData
+    //                     },
+    //                     series: json.seriesList
+    //                 });
+    //
+    //             });
+    //         }
+    //     },
+    //     error : function(errorMsg) {
+    //         alert("请求数据失败");
+    //     }
+    // });
+    myChart.setOption(option);
+</script>
+</body>
+</html>

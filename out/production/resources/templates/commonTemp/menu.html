@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="commonMenu" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>菜单测试</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <div class="container">
+    <div class="menu" id="menu">
+
+      <div class="menu-header">
+        请选择筛选条件
+      </div>
+      <th:block th:each="filterData : ${filterDatas}">
+        <div class="option-item clearfix js-option-item" th:attr="data-option=${filterData.dbName}">
+          <div class="headtitle" th:text="${filterData.showName}"></div>
+          <ul class="detail js-detail" >
+                <th:block th:each="data : ${filterData.showDatas}">
+                <li><a href="javascript:;" th:attr="data-value=${data}" th:text="${data}"></a></li>
+                </th:block>
+          </ul>
+          <div class="addmore">
+            <div class="addmore-button js-addmore-button">
+              <span class="icon-plus">+</span>
+              <span class="txt">多选</span>
+            </div>
+          </div>
+        </div>
+      </th:block>
+
+
+      <!--<div class="more-btn-container">-->
+        <!--<a class="moreoption-btn" id="moreoption-btn">-->
+          <!--更多选项-->
+        <!--</a>-->
+      <!--</div>-->
+
+      <div class="showoption" id="showoption">
+        <div class="header">
+          您选择了：
+        </div>
+        <a href="javascript:;" class="template showoption-item">
+          <span class="js-txt">1</span>
+          <span class="icon-close">x</span>
+        </a>
+      </div>
+
+    </div><!--menu end-->
+
+    <div id="ajaxdata"></div>
+  </div><!--container end-->
+  <script src="assets/js/jquer.min.js"></script>
+  <script src="assets/js/base.js"></script>
+</body>
+</html>
